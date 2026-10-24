@@ -21,7 +21,7 @@ Rerun it after adding a new skill or command, or after moving this folder.
 | # | Run | What happens |
 |---|---|---|
 | 1 | `cd ~/Developer && polly my-app && cd my-app && claude` | Creates the structure, `.polly` marker, git and first commit. Claude sees `Next: /brief` |
-| 2 | `/brief` ⏳ | Interviews me one question at a time → `docs/brief.md` |
+| 2 | `/brief` | Interviews me one question at a time → `docs/brief.md` |
 | 3 | `/architect` ⏳ | Proposes TS full-stack + 1–2 alternatives, I pick → `docs/arch.md` + decision record |
 | 4 | `/tasks` ⏳ | Vertical slices with acceptance criteria → `docs/tasks.md`. T-01 is the walking skeleton |
 | 5 | `/scaffold` ⏳ | Smallest app that runs end to end. Fills CLAUDE.md commands and layout, writes README.md |
@@ -61,7 +61,7 @@ suggestions) applies only where a `.polly` file is at the repo root.
 bin/polly          new project (polly <name> [dir]), polly adopt ⏳
 global/CLAUDE.md   loaded in every session: principles, defaults, lifecycle
 global/commands/   EPAV build loop
-global/skills/     one folder per skill ⏳
+global/skills/     one folder per skill
 global/hooks/      stage.sh: SessionStart stage line for polly projects
 template/          copied into each new project
 install.sh         links all of the above into ~/.claude/
