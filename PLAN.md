@@ -14,7 +14,9 @@ the daVinci boilerplate (knowledge base, lessons loop, research before new thing
 | OS | macOS (zsh, BSD tools). Scripts are POSIX sh / zsh-safe and avoid GNU-only flags. |
 | Default stack | TypeScript full-stack. /architect proposes this first, plus 1–2 alternatives when the brief calls for them. |
 | Tooling | pnpm, Vitest (Playwright only when a task needs e2e), deploy to Vercel. /scaffold pins exact versions. |
-| Evaluate vs plan | Merged into **/plan-task**: evaluate (files, risks, questions), then write the plan. One stop for approval. |
+| Evaluate vs plan | Merged into **/plan-task**: evaluate, stop if a question blocks, else plan, then stop for approval. `/evaluate` stays optional. Applies everywhere, work repos too. |
+| Build loop | **My existing EPAV commands** (`apply`, `evaluate`, `next`, `plan-task`, `validate`), moved into `global/commands/`. Not rewritten as skills. Polly projects wire them up through the template CLAUDE.md "Workflow" section. |
+| Code review | **Built-in `/code-review`**, no custom agent. `/validate` checks acceptance criteria and lessons/project rules; /code-review hunts bugs. Revisit in /retro if reviews miss repo-specific issues. |
 | Stage hook | **SessionStart only.** It prints a short stage summary once per session. No per-prompt injection. |
 | Domain-features registry | **Skipped.** arch.md (code layout) and knowledge/INDEX.md cover it. /retro can add it later if needed. |
 
@@ -32,23 +34,24 @@ polly-ai-workflow/
 │   ├── CLAUDE.md             — habits + lifecycle guide (< ~60 lines)
 │   ├── hooks/
 │   │   └── stage.sh          — SessionStart: report project stage + suggest next skill
-│   ├── agents/
-│   │   └── code-reviewer.md  — used by /validate
+│   ├── commands/             — EPAV build loop (repo-agnostic; follows each repo's CLAUDE.md)
+│   │   ├── next.md           — which task is next → /plan-task
+│   │   ├── evaluate.md       — optional read-only look
+│   │   ├── plan-task.md      — evaluate + plan, stop for approval
+│   │   ├── apply.md          — implement exactly the plan
+│   │   └── validate.md       — checks, criteria, lessons/rules → /code-review
 │   └── skills/
 │       ├── brief/SKILL.md
 │       ├── architect/SKILL.md
 │       ├── tasks/SKILL.md
 │       ├── spike/SKILL.md
 │       ├── scaffold/SKILL.md
-│       ├── plan-task/SKILL.md
-│       ├── apply/SKILL.md
-│       ├── validate/SKILL.md
 │       ├── lesson/SKILL.md
 │       ├── retro/SKILL.md
 │       ├── best-practice/SKILL.md
 │       └── onboard/SKILL.md
 └── template/
-    ├── CLAUDE.md             — empty sections, each tagged with the skill that fills it
+    ├── CLAUDE.md             — empty sections tagged with their owning skill + fixed Workflow section
     ├── .gitignore            — .DS_Store, .env* (stack ignores come from /scaffold)
     ├── docs/
     │   ├── brief.md          — placeholder: "Run /brief"
@@ -63,7 +66,7 @@ polly-ai-workflow/
         └── retros/.gitkeep
 ```
 
-## Lifecycle and skills (12)
+## Lifecycle: 9 new skills + 5 existing EPAV commands
 **SHAPE**
 - `/brief` asks me one question at a time and writes docs/brief.md: problem, user, core loop, v1 scope, non-goals, done signal. One page.
 - `/architect` defaults to TS full-stack (pnpm/Vitest/Vercel) plus 1–2 alternatives. I pick, and it writes docs/arch.md plus a decision record.
@@ -73,10 +76,12 @@ polly-ai-workflow/
 **SKELETON**
 - `/scaffold` builds the smallest app that runs end to end (T-01). It fills the CLAUDE.md commands and code layout, and pins exact versions in arch.md. Run once per project.
 
-**BUILD LOOP** (one task at a time, stop after each step)
-- `/plan-task T-xx`: evaluate (affected files, risks, open questions), then a file-by-file plan in knowledge/tasks/T-xx.md. **Stop.** No code until I approve.
+**BUILD LOOP** (existing EPAV commands, one task at a time, stop after each step)
+- `/next` (optional): which task is next.
+- `/plan-task T-xx`: evaluate (affected files, risks, open questions). It stops if a question blocks; otherwise it writes a file-by-file plan in knowledge/tasks/T-xx.md. **Stop.** No code until I approve. `/evaluate` is available for a look without planning.
 - `/apply`: implement exactly the approved plan, with no scope creep. If the plan turns out wrong, stop and say so instead of improvising.
-- `/validate`: run build, lint, and tests and show the real output. Check each acceptance criterion, review the code through the `code-reviewer` subagent, record the outcome in T-xx.md, and update the status in docs/tasks.md.
+- `/validate`: run the repo's checks and show the real output, check each acceptance criterion and the lessons/project rules, sort findings (blocker / fix now / backlog), say whether a lesson is owed, and set `Status: done` when everything passes.
+- `/code-review` (built in): bug hunt on the diff.
 
 **LEARN**
 - `/lesson` runs after a correction: what happened, root cause, rule for next time. Written to knowledge/lessons/.
@@ -92,8 +97,8 @@ polly-ai-workflow/
 | docs/brief.md | /brief, /retro (updates) |
 | docs/arch.md | /architect, /scaffold (versions), /onboard |
 | docs/tasks.md | /tasks, /validate (status), /retro (backlog) |
-| CLAUDE.md sections | /brief (what), /architect (stack), /scaffold (commands, layout), /onboard |
-| knowledge/tasks/ | /plan-task, /validate |
+| CLAUDE.md sections | /brief (what), /architect (stack), /scaffold (commands, layout), /onboard. Workflow section: fixed by the template. |
+| knowledge/tasks/ | /plan-task (plan), /apply (ticks), /validate (outcome) |
 | knowledge/lessons/ | /lesson |
 | knowledge/decisions/ | /architect, /spike (append-only) |
 | knowledge/best-practices/ | /best-practice |
@@ -115,10 +120,11 @@ polly-ai-workflow/
 - A doc counts as missing if it is absent or still contains `<!-- polly:placeholder -->` (skills remove the marker when they fill the doc).
 
 ## Install rules (install.sh)
-- **Global CLAUDE.md:** the existing ~/.claude/CLAUDE.md has the graphify section. Move that section into global/CLAUDE.md, back up the old file to `CLAUDE.md.bak.<date>`, then symlink.
-- **Skills:** symlink each `global/skills/<name>` on its own, not the whole skills/ folder, so `graphify/` and `synced/` stay where they are.
-- **Name clash:** claude.ai-synced skills named `apply`, `evaluate`, `next`, `plan-task`, `validate` already exist. Before building, check which one wins. If the synced copies shadow the local ones, either remove them from the claude.ai sync or rename mine (e.g. a `w-` prefix). Decide at build step 4.
-- **Agents/hooks:** symlink `global/agents/*` and `global/hooks/stage.sh`. Merge the SessionStart entry into ~/.claude/settings.json with `python3` (no jq dependency) and don't touch the other keys.
+- **Backups:** anything replaced is moved to `~/.claude/backups/polly-<time>/` (same relative path) before linking.
+- **Global CLAUDE.md:** the graphify section is carried into global/CLAUDE.md. Back up the old file, then symlink.
+- **Commands:** `global/commands/*.md` are owned by this repo. Back up the existing file in `~/.claude/commands/`, then symlink.
+- **Skills:** symlink each `global/skills/<name>` on its own, not the whole skills/ folder, so `graphify/` and `synced/` stay where they are. An existing skill of the same name is skipped, never replaced.
+- **Hooks:** symlink `global/hooks/stage.sh`. Merge the SessionStart entry into ~/.claude/settings.json with `python3` (no jq dependency) and don't touch the other keys.
 - **PATH:** symlink `bin/polly` into `~/.local/bin/` (and warn if that dir isn't on PATH in ~/.zshrc).
 - `CLAUDE_HOME` / `LOCAL_BIN` env vars override the targets, for sandbox tests.
 - Idempotent: safe to re-run. Print what it linked or skipped.
@@ -135,9 +141,9 @@ polly-ai-workflow/
 1. `global/CLAUDE.md` (with the graphify section carried over)
 2. `template/` + `bin/polly` (test: stamp a throwaway project)
 3. `install.sh` + `global/hooks/stage.sh` (test: new session in the stamped project shows the stage line)
-4. Resolve the synced-skill name clash, then `/brief` (test on a real project)
+4. `/brief` (test on a real project)
 5. `/architect`, `/tasks`, `/scaffold`
-6. `/plan-task`, `/apply`, `/validate` + `code-reviewer` agent
+6. ~~Build loop~~ done early: EPAV commands moved into the repo, /plan-task merged with evaluate, template wired
 7. `/lesson`, `/retro`, `/best-practice`, `/spike`
 8. `polly adopt` + `/onboard` (test on an existing repo)
 9. README.md

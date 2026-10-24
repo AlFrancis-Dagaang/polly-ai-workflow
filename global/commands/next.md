@@ -5,7 +5,7 @@ argument-hint: [optional focus area]
 
 $ARGUMENTS
 
-You are BEFORE the Evaluate step. Read and report only.
+You are BEFORE the Plan step. Read and report only.
 
 Rules that come first:
 - Follow this repo's CLAUDE.md for where plans and lessons live. Do not invent folders.
@@ -17,4 +17,4 @@ Do this:
 3. Say which task is next and why, in two or three sentences. If several are equal, recommend one.
 4. Flag anything blocked, stale, or waiting on the owner.
 
-Then stop. End with: "Next: /evaluate <that task>".
+Then stop. End with: "Next: /plan-task <that task>".

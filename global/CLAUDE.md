@@ -28,7 +28,8 @@ skill for it. Don't run it unless I ask.
 | Everything above exists | build loop on the next open task |
 
 Build loop, one task at a time, stopping after each step:
-`/plan-task T-xx` → my approval → `/apply` → `/validate`.
+`/plan-task T-xx` → my approval → `/apply` → `/validate` → `/code-review`.
+`/next` says which task is next. `/evaluate` is optional: a read-only look without planning.
 
 Other skills:
 - `/spike`: answer one technical question with throwaway code
