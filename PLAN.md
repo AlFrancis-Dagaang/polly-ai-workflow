@@ -53,6 +53,7 @@ polly-ai-workflow/
 └── template/
     ├── CLAUDE.md             — empty sections tagged with their owning skill + fixed Workflow section
     ├── .gitignore            — .DS_Store, .env* (stack ignores come from /scaffold)
+    ├── .polly                — marker: this repo is a polly project (hook + lifecycle apply)
     ├── docs/
     │   ├── brief.md          — placeholder: "Run /brief"
     │   ├── arch.md           — placeholder: "Run /architect"
@@ -106,7 +107,7 @@ polly-ai-workflow/
 | knowledge/INDEX.md | any skill that adds a knowledge file appends one line |
 
 ## SessionStart hook (global/hooks/stage.sh)
-- Runs once per session. It is silent unless the project has the template layout (`docs/` and `knowledge/`), so other repos are unaffected.
+- Runs once per session. It is silent unless the repo root has a `.polly` marker file (made by `polly` / `polly adopt`). Folder names alone aren't enough: older projects (l1a-agent, leavetrack) also have docs/ + knowledge/.
 - Output stays under 10 lines, for example:
   `Stage: brief ✓ · arch ✗ · tasks ✗ · scaffold ✗ → next: /architect`
   `In progress: T-03 (planned, not applied)` · `Lessons: 4 (read knowledge/lessons/ before planning)`
