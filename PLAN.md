@@ -49,6 +49,7 @@ polly-ai-workflow/
 │       └── onboard/SKILL.md
 └── template/
     ├── CLAUDE.md             — empty sections, each tagged with the skill that fills it
+    ├── .gitignore            — .DS_Store, .env* (stack ignores come from /scaffold)
     ├── docs/
     │   ├── brief.md          — placeholder: "Run /brief"
     │   ├── arch.md           — placeholder: "Run /architect"
@@ -104,7 +105,7 @@ polly-ai-workflow/
 - Output stays under 10 lines, for example:
   `Stage: brief ✓ · arch ✗ · tasks ✗ · scaffold ✗ → next: /architect`
   `In progress: T-03 (planned, not applied)` · `Lessons: 4 (read knowledge/lessons/ before planning)`
-- It detects a "placeholder" doc by a marker line, so an untouched template doc counts as missing.
+- A doc counts as missing if it is absent or still contains `<!-- polly:placeholder -->` (skills remove the marker when they fill the doc).
 
 ## Install rules (install.sh)
 - **Global CLAUDE.md:** the existing ~/.claude/CLAUDE.md has the graphify section. Move that section into global/CLAUDE.md, back up the old file to `CLAUDE.md.bak.<date>`, then symlink.
