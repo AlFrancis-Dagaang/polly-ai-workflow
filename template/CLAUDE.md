@@ -26,6 +26,8 @@ Run /scaffold.
 - Checks: the commands in the Commands section. Never invent others.
 - Done: every acceptance criterion met and every check passes. Then /validate sets `Status: done`
   in `docs/tasks.md` and records the outcome at the end of the plan file.
+- Code graph: `graphify-out/`. Built by `/graphify` after /scaffold, refreshed with
+  `/graphify . --update` after each validated task. Query it before searching the code.
 - Lessons: `knowledge/lessons/`. Decisions: `knowledge/decisions/` (append-only).
 - Add one line to `knowledge/INDEX.md` for each new knowledge file.
 

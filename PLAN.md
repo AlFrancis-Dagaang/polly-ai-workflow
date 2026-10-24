@@ -76,6 +76,7 @@ polly-ai-workflow/
 
 **SKELETON**
 - `/scaffold` builds the smallest app that runs end to end (T-01). It fills the CLAUDE.md commands and code layout, and pins exact versions in arch.md. Run once per project.
+  After it, `/graphify` builds the code graph (`graphify-out/`, gitignored); `/graphify . --update` after each validated task.
   It also writes `README.md` for humans who clone the repo: what it is, prerequisites, install, run, test. Nothing about polly beyond one line.
 
 **BUILD LOOP** (existing EPAV commands, one task at a time, stop after each step)

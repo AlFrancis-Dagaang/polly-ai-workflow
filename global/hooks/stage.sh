@@ -23,6 +23,9 @@ status_of() { tasks | awk -v t="$1" '$1 == t { print $2 }'; }
 skeleton='✗'
 [ "$(status_of T-01)" = done ] && skeleton='✓'
 
+graph='✗'
+[ -f graphify-out/graph.json ] && graph='✓'
+
 # First task not done; "in progress" if it already has a plan file.
 open_task=$(tasks | awk '$2 != "done" { print $1; exit }')
 
@@ -30,6 +33,7 @@ if ! filled docs/brief.md; then next='/brief'
 elif ! filled docs/arch.md; then next='/architect'
 elif ! filled docs/tasks.md; then next='/tasks'
 elif [ "$skeleton" = '✗' ]; then next='/scaffold'
+elif [ "$graph" = '✗' ]; then next='/graphify (build the code graph once)'
 elif [ -z "$open_task" ]; then next='all tasks done: /retro, or add tasks with /tasks'
 elif [ -f "knowledge/tasks/$open_task.md" ]; then
   next="continue $open_task (read knowledge/tasks/$open_task.md for where it stands)"
@@ -39,7 +43,7 @@ fi
 lessons=$(find knowledge/lessons -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
 
 echo "Project stage (polly):"
-echo "  brief $(mark docs/brief.md) · arch $(mark docs/arch.md) · tasks $(mark docs/tasks.md) · skeleton $skeleton"
+echo "  brief $(mark docs/brief.md) · arch $(mark docs/arch.md) · tasks $(mark docs/tasks.md) · skeleton $skeleton · graph $graph"
 echo "  Next: $next"
 [ "$lessons" -gt 0 ] && echo "  Lessons: $lessons in knowledge/lessons/ (read before planning)"
 echo "  Suggest the next step; don't run it unless asked."
