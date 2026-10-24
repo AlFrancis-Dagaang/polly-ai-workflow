@@ -105,6 +105,13 @@ polly-ai-workflow/
 - Output stays under 10 lines, for example:
   `Stage: brief ✓ · arch ✗ · tasks ✗ · scaffold ✗ → next: /architect`
   `In progress: T-03 (planned, not applied)` · `Lessons: 4 (read knowledge/lessons/ before planning)`
+- Reads task status from docs/tasks.md, which must use this format (/tasks writes it, /validate flips status):
+  ```
+  ## T-01: Walking skeleton
+  Status: todo        <- or: done
+  - [ ] acceptance criterion
+  ```
+  A task with `knowledge/tasks/T-xx.md` but not done is "in progress".
 - A doc counts as missing if it is absent or still contains `<!-- polly:placeholder -->` (skills remove the marker when they fill the doc).
 
 ## Install rules (install.sh)
@@ -113,6 +120,7 @@ polly-ai-workflow/
 - **Name clash:** claude.ai-synced skills named `apply`, `evaluate`, `next`, `plan-task`, `validate` already exist. Before building, check which one wins. If the synced copies shadow the local ones, either remove them from the claude.ai sync or rename mine (e.g. a `w-` prefix). Decide at build step 4.
 - **Agents/hooks:** symlink `global/agents/*` and `global/hooks/stage.sh`. Merge the SessionStart entry into ~/.claude/settings.json with `python3` (no jq dependency) and don't touch the other keys.
 - **PATH:** symlink `bin/polly` into `~/.local/bin/` (and warn if that dir isn't on PATH in ~/.zshrc).
+- `CLAUDE_HOME` / `LOCAL_BIN` env vars override the targets, for sandbox tests.
 - Idempotent: safe to re-run. Print what it linked or skipped.
 
 ## Principles (go into global/CLAUDE.md)
