@@ -18,6 +18,7 @@ the daVinci boilerplate (knowledge base, lessons loop, research before new thing
 | Build loop | **My existing EPAV commands** (`apply`, `evaluate`, `next`, `plan-task`, `validate`), moved into `global/commands/`. Not rewritten as skills. Polly projects wire them up through the template CLAUDE.md "Workflow" section. |
 | Code review | **Built-in `/code-review`**, no custom agent. `/validate` checks acceptance criteria and lessons/project rules; /code-review hunts bugs. Revisit in /retro if reviews miss repo-specific issues. |
 | Stage hook | **SessionStart only.** It prints a short stage summary once per session. No per-prompt injection. |
+| Commands vs skills | New lifecycle steps are **skills** in `global/skills/` (Claude Code docs prefer skills for new work), with `disable-model-invocation: true` so they only run when typed. EPAV stays as commands. |
 | Domain-features registry | **Skipped.** arch.md (code layout) and knowledge/INDEX.md cover it. /retro can add it later if needed. |
 
 ## Repo structure
@@ -144,7 +145,7 @@ polly-ai-workflow/
 1. `global/CLAUDE.md` (with the graphify section carried over)
 2. `template/` + `bin/polly` (test: stamp a throwaway project)
 3. `install.sh` + `global/hooks/stage.sh` (test: new session in the stamped project shows the stage line)
-4. `/brief` (test on a real project)
+4. ~~`/brief`~~ done: `global/skills/brief/SKILL.md` (test on a real project)
 5. `/architect`, `/tasks`, `/scaffold`
 6. ~~Build loop~~ done early: EPAV commands moved into the repo, /plan-task merged with evaluate, template wired
 7. `/lesson`, `/retro`, `/best-practice`, `/spike`
