@@ -1,11 +1,11 @@
 #!/bin/sh
 # SessionStart hook: print the project's stage so Claude can suggest the next skill.
-# Silent outside projects with the polly layout (docs/ and knowledge/).
+# Silent unless the project root has a .polly marker (made by `polly`).
 # stdout is added to Claude's context. Keep it under ~10 lines.
 
 dir=${CLAUDE_PROJECT_DIR:-$PWD}
 cd "$dir" 2>/dev/null || exit 0
-[ -d docs ] && [ -d knowledge ] || exit 0
+[ -f .polly ] || exit 0
 
 # A doc is missing if it is absent or still has the template marker.
 filled() { [ -f "$1" ] && ! grep -q 'polly:placeholder' "$1"; }
