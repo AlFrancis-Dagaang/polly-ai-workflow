@@ -148,4 +148,4 @@ polly-ai-workflow/
 6. ~~Build loop~~ done early: EPAV commands moved into the repo, /plan-task merged with evaluate, template wired
 7. `/lesson`, `/retro`, `/best-practice`, `/spike`
 8. `polly adopt` + `/onboard` (test on an existing repo)
-9. README.md
+9. README.md: written early as the usage guide; tick off ⏳ items as each piece lands
