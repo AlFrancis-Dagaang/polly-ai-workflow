@@ -30,10 +30,12 @@ missing step, and suggest the skill for it. Don't run it unless I ask.
 | `docs/arch.md` | `/architect` |
 | `docs/tasks.md` | `/tasks` |
 | No runnable app (T-01 not done) | `/scaffold` |
+| App runs, no `graphify-out/` | `/graphify` (build the code graph once) |
 | Everything above exists | build loop on the next open task |
 
 Build loop, one task at a time, stopping after each step:
 `/plan-task T-xx` → my approval → `/apply` → `/validate` → `/code-review`.
+After a task passes `/validate`, suggest `/graphify . --update` to refresh the graph.
 `/next` says which task is next. `/evaluate` is optional: a read-only look without planning.
 
 Other skills:

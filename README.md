@@ -25,19 +25,21 @@ Rerun it after adding a new skill or command, or after moving this folder.
 | 3 | `/architect` ⏳ | Proposes TS full-stack + 1–2 alternatives, I pick → `docs/arch.md` + decision record |
 | 4 | `/tasks` ⏳ | Vertical slices with acceptance criteria → `docs/tasks.md`. T-01 is the walking skeleton |
 | 5 | `/scaffold` ⏳ | Smallest app that runs end to end. Fills CLAUDE.md commands and layout, writes README.md |
+| 6 | `/graphify` | Builds the code graph in `graphify-out/` (gitignored). Claude queries it before searching code |
 
 ## Build loop (repeat for each task)
 | # | Run | What happens |
 |---|---|---|
-| 6 | `/next` | Optional: which task is next, and why |
-| 7 | `/plan-task T-02` | Evaluates, then writes a plan to `knowledge/tasks/T-02.md`. **Stops for approval** |
-| 8 | *approve* | Or ask for changes and re-plan |
-| 9 | `/apply` | Implements exactly the plan, nothing extra |
-| 10 | `/validate` | Runs checks, checks acceptance criteria and lessons, sets `Status: done` |
-| 11 | `/code-review` | Built-in bug hunt on the diff |
-| 12 | *commit* | Claude never commits unless asked |
+| 7 | `/next` | Optional: which task is next, and why |
+| 8 | `/plan-task T-02` | Evaluates, then writes a plan to `knowledge/tasks/T-02.md`. **Stops for approval** |
+| 9 | *approve* | Or ask for changes and re-plan |
+| 10 | `/apply` | Implements exactly the plan, nothing extra |
+| 11 | `/validate` | Runs checks, checks acceptance criteria and lessons, sets `Status: done` |
+| 12 | `/code-review` | Built-in bug hunt on the diff |
+| 13 | `/graphify . --update` | Refresh the graph with what changed |
+| 14 | *commit* | Claude never commits unless asked |
 
-Then back to 6. `/evaluate` is available for a read-only look without planning.
+Then back to 7. `/evaluate` is available for a read-only look without planning.
 
 ## When needed
 | When | Run |
