@@ -146,7 +146,7 @@ polly-ai-workflow/
 2. `template/` + `bin/polly` (test: stamp a throwaway project)
 3. `install.sh` + `global/hooks/stage.sh` (test: new session in the stamped project shows the stage line)
 4. ~~`/brief`~~ done: `global/skills/brief/SKILL.md` (test on a real project)
-5. `/architect`, `/tasks`, `/scaffold`
+5. ~~`/architect`~~ done: `global/skills/architect/SKILL.md` (test on a real project). Still open: `/tasks`, `/scaffold`
 6. ~~Build loop~~ done early: EPAV commands moved into the repo, /plan-task merged with evaluate, template wired
 7. `/lesson`, `/retro`, `/best-practice`, `/spike`
 8. `polly adopt` + `/onboard` (test on an existing repo)
