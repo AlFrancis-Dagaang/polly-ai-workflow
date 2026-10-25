@@ -1,7 +1,7 @@
 ---
 name: brief
 description: Interview me one question at a time, then write docs/brief.md. First step of a polly project.
-argument-hint: [rough idea]
+argument-hint: "[rough idea]"
 disable-model-invocation: true
 ---
 
@@ -36,6 +36,6 @@ Do this:
    ## Non-goals
    ## Done signal
    ```
-6. In `CLAUDE.md`, replace the "Run /brief." line under "What this is" with 2–3 lines: problem, user, core loop. Keep the owner comment.
+6. In `CLAUDE.md`, replace what is under "What this is" (the "Run /brief." line, or the lines from a past run) with 2–3 lines: problem, user, core loop. Keep the owner comment.
 
 End with: "Next: /architect".
