@@ -71,7 +71,7 @@ polly-ai-workflow/
 ## Lifecycle: 9 new skills + 5 existing EPAV commands
 **SHAPE**
 - `/brief` asks me one question at a time and writes docs/brief.md: problem, user, core loop, v1 scope, non-goals, done signal. One page.
-- `/architect` defaults to TS full-stack (pnpm/Vitest/Vercel) plus 1–2 alternatives. I pick, and it writes docs/arch.md plus a decision record.
+- `/architect` defaults to TS full-stack (pnpm/Vitest/Vercel), plus 1–2 alternatives when the brief needs them. I pick, and it writes docs/arch.md plus a decision record.
 - `/tasks` writes vertical slices with checkable acceptance criteria to docs/tasks.md. T-01 is always the walking skeleton.
 - `/spike` runs a throwaway experiment to answer one technical question. The result goes in knowledge/decisions/ and the code is discarded.
 
