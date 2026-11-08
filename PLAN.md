@@ -44,7 +44,7 @@ polly-ai-workflow/
 │   │   ├── evaluate.md       — optional read-only look
 │   │   ├── plan-task.md      — evaluate + plan, stop for approval
 │   │   ├── apply.md          — implement exactly the plan
-│   │   └── validate.md       — checks, criteria, lessons/rules → /code-review
+│   │   └── validate.md       — checks, criteria, lessons/rules; sets done + outcome
 │   └── skills/
 │       ├── brief/SKILL.md
 │       ├── architect/SKILL.md
@@ -92,7 +92,7 @@ polly-ai-workflow/
 - `/next` (optional): which task is next.
 - `/plan-task T-xx`: evaluate (affected files, risks, open questions). It stops if a question blocks; otherwise it writes a file-by-file plan in knowledge/tasks/T-xx.md. **Stop.** No code until I approve. `/evaluate` is available for a look without planning.
 - `/apply`: implement exactly the approved plan, with no scope creep. If the plan turns out wrong, stop and say so instead of improvising.
-- `/validate`: run the repo's checks and show the real output, check each acceptance criterion and the lessons/project rules, sort findings (blocker / fix now / backlog), say whether a lesson is owed, and set `Status: done` when everything passes.
+- `/validate`: run the repo's checks and show the real output, check each acceptance criterion and the lessons/project rules, sort findings (blocker / fix now / backlog), say whether a lesson is owed, and set `Status: done` and write `## Outcome` to the plan when everything passes.
 - `/code-review` (built in): bug hunt on the diff.
 
 **LEARN**

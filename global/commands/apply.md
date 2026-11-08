@@ -13,7 +13,7 @@ Rules that come first:
 - Do not commit, push, install dependencies, or touch files outside the plan unless the owner said so.
 
 Do this:
-1. Find the approved plan in this conversation or in the place the repo keeps plans. If there is none, or it was never approved, say so and stop.
+1. Find the plan in this conversation or in the place the repo keeps plans. If an argument names a task, use that task's plan; if several plans are open, ask which. If there is none, say so and stop. If the plan is a file and its approval isn't in this conversation, ask "Is <plan file> approved?" and wait; go on only if I say yes.
 2. Implement the plan step by step. Tick each item in the plan as it is done, if the plan is a file.
 3. Keep every change small and in the existing style. Reuse what already exists. Add no extra features, options or abstractions.
 4. Where the plan needs a check for new logic, add it the way the repo adds checks.

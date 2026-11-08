@@ -55,7 +55,7 @@ my-app/
 | 8 | `/plan-task T-02` | Evaluates, then writes a plan to `knowledge/tasks/T-02.md`. **Stops for approval** |
 | 9 | *approve* | Or ask for changes and re-plan |
 | 10 | `/apply` | Implements exactly the plan, nothing extra |
-| 11 | `/validate` | Runs checks, checks acceptance criteria and lessons, sets `Status: done` |
+| 11 | `/validate` | Runs checks, checks acceptance criteria and lessons, when all pass, sets `Status: done` and writes `## Outcome` to the plan |
 | 12 | `/code-review` | Optional, only when I ask: built-in bug hunt on the diff |
 | 13 | `/graphify . --update` | Refresh the graph with what changed |
 | 14 | `/commit`, then `/create-pr` | Only when I ask. Claude never commits on its own |

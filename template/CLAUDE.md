@@ -20,7 +20,7 @@ Run /scaffold.
 
 ## Workflow
 <!-- owner: polly — tells the EPAV commands where things go. Change only on purpose. -->
-- Build loop: `/plan-task T-xx` → my approval → `/apply` → `/validate` → `/code-review`.
+- Build loop: `/plan-task T-xx` → my approval → `/apply` → `/validate`. `/code-review` only when I ask.
 - Tasks: `docs/tasks.md`. Each is `## T-xx: Title`, a `Status: todo|done` line, and acceptance criteria.
 - Plans: `knowledge/tasks/T-xx.md`, one per task, with checkboxes. Start it with the task's acceptance criteria.
 - Checks: the commands in the Commands section. Never invent others.
