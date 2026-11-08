@@ -19,6 +19,8 @@ the daVinci boilerplate (knowledge base, lessons loop, research before new thing
 | Code review | **Built-in `/code-review`**, no custom agent. `/validate` checks acceptance criteria and lessons/project rules; /code-review hunts bugs. Revisit in /retro if reviews miss repo-specific issues. |
 | Stage hook | **SessionStart only.** It prints a short stage summary once per session. No per-prompt injection. |
 | Commands vs skills | New lifecycle steps are **skills** in `global/skills/` (Claude Code docs prefer skills for new work), with `disable-model-invocation: true` so they only run when typed. EPAV stays as commands. |
+| Learn and research outside polly | **/lesson, /best-practice, /spike work in any repo.** Outside polly they follow the repo's CLAUDE.md for where notes go, ask once if it names none, and never create folders or INDEX.md. /retro and /onboard stay polly-only. |
+| Commit and PR | **/commit and /create-pr** skills, typed only, work in any repo (polly extras when `.polly` exists). Each shows the result and waits for OK. No /review-pr: built-in /code-review covers it. |
 | Domain-features registry | **Skipped.** arch.md (code layout) and knowledge/INDEX.md cover it. /retro can add it later if needed. |
 
 ## Repo structure
@@ -50,7 +52,9 @@ polly-ai-workflow/
 │       ├── lesson/SKILL.md
 │       ├── retro/SKILL.md
 │       ├── best-practice/SKILL.md
-│       └── onboard/SKILL.md
+│       ├── onboard/SKILL.md
+│       ├── commit/SKILL.md
+│       └── create-pr/SKILL.md
 └── template/
     ├── CLAUDE.md             — empty sections tagged with their owning skill + fixed Workflow section
     ├── .gitignore            — .DS_Store, .env* (stack ignores come from /scaffold)

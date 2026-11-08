@@ -61,11 +61,22 @@ Then back to 7. `/evaluate` is available for a read-only look without planning.
 | A technical question I can't answer yet | `/spike` |
 | Bringing an existing repo into polly | `polly adopt` → `/onboard` |
 
+## Commit and PR
+Work in any repo, typed only. Both show what they will do and wait for my OK.
+| Run | What happens |
+|---|---|
+| `/commit` | Reviews the changes, flags secrets, drafts a message in the repo's own style, stages by name, commits. Never pushes |
+| `/create-pr` | Drafts the PR from the commits, shows the `gh` account and repo, pushes and opens it only after OK. Never merges |
+
 ## Existing (non-polly) repos
 The EPAV commands (`/next`, `/evaluate`, `/plan-task`, `/apply`, `/validate`)
 work in any repo: they follow that repo's own CLAUDE.md for where plans,
 lessons and checks live. Polly-specific behaviour (stage line, lifecycle
 suggestions) applies only where a `.polly` file is at the repo root.
+
+`/lesson`, `/best-practice` and `/spike` also work in any repo. Outside polly they
+follow that repo's CLAUDE.md for where notes go; if it names none they ask once and
+create nothing on their own. `/retro` and `/onboard` stay polly-only.
 
 ## Layout
 ```

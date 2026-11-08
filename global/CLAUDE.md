@@ -15,7 +15,10 @@ A project's own CLAUDE.md wins over this file where they differ.
 - New projects: TypeScript full-stack. pnpm, Vitest, Vercel. Pin exact versions.
   Existing projects keep their own stack.
 - OS: macOS, zsh. Avoid GNU-only flags in scripts.
-- Don't commit unless I ask.
+- Don't commit unless I ask. When I do, `/commit`, then `/create-pr` (any repo).
+- Any repo, typed only: `/lesson` after a correction, `/best-practice` before adding
+  something new, `/spike` to answer one technical question with throwaway code. They
+  follow the repo's own CLAUDE.md for where notes go.
 
 ## Polly projects only
 This section and the next apply only when the repo root has a `.polly` file.
@@ -39,8 +42,6 @@ After a task passes `/validate`, suggest `/graphify . --update` to refresh the g
 `/next` says which task is next. `/evaluate` is optional: a read-only look without planning.
 
 Other skills:
-- `/spike`: answer one technical question with throwaway code
-- `/best-practice`: research before adding something new to the codebase
 - `/retro`: after a milestone
 - `/onboard`: existing repo, after `polly adopt`
 
