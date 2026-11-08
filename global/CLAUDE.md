@@ -19,6 +19,7 @@ A project's own CLAUDE.md wins over this file where they differ.
 - Any repo, typed only: `/lesson` after a correction, `/best-practice` before adding
   something new, `/spike` to answer one technical question with throwaway code. They
   follow the repo's own CLAUDE.md for where notes go.
+- `/prototype`: a one-file HTML mock before planning a feature with a screen. Task criteria stay the scope.
 - `/next-session`: prints a prompt to paste after `/clear`, when I say the session is getting long.
 
 ## Polly projects only

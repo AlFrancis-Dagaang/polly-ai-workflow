@@ -14,7 +14,7 @@ Rules that come first:
 
 Evaluate first:
 1. If this conversation already has an evaluation of this task (from /evaluate), use it and go to step 4.
-2. Read the repo's instructions and what it already knows: its lessons, open task plans, and any best-practice or architecture notes. If the repo has a code graph or an index it tells you to use, ask it before searching and confirm its answer in the file. Find and read the files and seams the task touches.
+2. Read the repo's instructions and what it already knows: its lessons, open task plans, and any best-practice or architecture notes. If the repo has a code graph or an index it tells you to use, ask it before searching and confirm its answer in the file. Find and read the files and seams the task touches. If `prototypes/` holds a file whose top comment lists this task (`Covers: T-xx`), read it for look and behaviour, but plan only this task's criteria: list parts that belong to another task as "belongs to T-yy, not planned here", and parts that belong to no task under what you are leaving out.
 3. Report, briefly: what the task means in this repo, affected files, risks, open questions only the owner can answer, and how big it is. If an open question blocks the plan, ask it and stop. Do not plan on a guess.
 
 Then plan:

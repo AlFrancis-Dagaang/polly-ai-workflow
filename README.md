@@ -5,7 +5,7 @@ or architecture doc. `polly` creates the structure; Claude fills it in as we
 work: interview, lightweight docs, scaffold, then build task by task with a
 stop for my review after each step.
 
-Design and decisions: [PLAN.md](PLAN.md). ⏳ = not built yet.
+Design and decisions: [PLAN.md](PLAN.md).
 
 ## Install (once per machine)
 ```sh
@@ -38,6 +38,16 @@ alias claude-personal="CLAUDE_CONFIG_DIR=$HOME/.claude-personal claude"
 | 5 | `/scaffold` | Smallest app that runs end to end. Fills CLAUDE.md commands and layout, writes README.md |
 | 6 | `/graphify` | Builds the code graph in `graphify-out/` (gitignored). Claude queries it before searching code |
 
+A polly project looks like this:
+```
+my-app/
+├── .polly            marker: turns the stage hook and lifecycle on
+├── CLAUDE.md         what it is, stack, commands, layout, project rules
+├── docs/             brief.md, arch.md, tasks.md
+├── knowledge/        INDEX.md, lessons/, decisions/, best-practices/, tasks/, retros/
+└── prototypes/       HTML mocks from /prototype (made on first use)
+```
+
 ## Build loop (repeat for each task)
 | # | Run | What happens |
 |---|---|---|
@@ -46,11 +56,15 @@ alias claude-personal="CLAUDE_CONFIG_DIR=$HOME/.claude-personal claude"
 | 9 | *approve* | Or ask for changes and re-plan |
 | 10 | `/apply` | Implements exactly the plan, nothing extra |
 | 11 | `/validate` | Runs checks, checks acceptance criteria and lessons, sets `Status: done` |
-| 12 | `/code-review` | Built-in bug hunt on the diff |
+| 12 | `/code-review` | Optional, only when I ask: built-in bug hunt on the diff |
 | 13 | `/graphify . --update` | Refresh the graph with what changed |
-| 14 | *commit* | Claude never commits unless asked |
+| 14 | `/commit`, then `/create-pr` | Only when I ask. Claude never commits on its own |
 
 Then back to 7. `/evaluate` is available for a read-only look without planning.
+
+A feature with a screen? Run `/prototype T-04` before `/plan-task T-04`. The task's
+criteria stay the scope; the mock is only a reference. `/plan-task` reads a prototype
+whose `Covers:` line lists the task, and lists anything extra as left out.
 
 ## When needed
 | When | Run |
@@ -59,6 +73,7 @@ Then back to 7. `/evaluate` is available for a read-only look without planning.
 | A milestone is done | `/retro` |
 | Adding something new to the codebase | `/best-practice`, before `/plan-task` |
 | A technical question I can't answer yet | `/spike` |
+| Planning a feature that has a screen | `/prototype T-04`, before `/plan-task`. One HTML file in `prototypes/`; the diff against the task goes to `/tasks` |
 | Bringing an existing repo into polly | `polly adopt` → `/onboard` |
 
 ## Commit and PR
@@ -66,7 +81,7 @@ Work in any repo, typed only. Both show what they will do and wait for my OK.
 | Run | What happens |
 |---|---|
 | `/commit` | Reviews the changes, flags secrets, drafts a message in the repo's own style, stages by name, commits. Never pushes |
-| `/create-pr` | Drafts the PR from the commits, shows the `gh` account and repo, pushes and opens it only after OK. Never merges |
+| `/create-pr` | Drafts the PR from the commits, shows the `gh` account and repo, pushes and opens it only after OK. Never merges. Needs `gh` (`brew install gh`, then `gh auth login` in each profile) |
 
 ## Next session
 | Run | What happens |
@@ -79,6 +94,12 @@ work in any repo: they follow that repo's own CLAUDE.md for where plans,
 lessons and checks live. Polly-specific behaviour (stage line, lifecycle
 suggestions) applies only where a `.polly` file is at the repo root.
 
+`polly adopt [dir]` turns an existing git repo into a polly project: it adds only the
+missing template files, never overwrites or commits, and warns if `.gitignore` does
+not ignore `.env`. If `knowledge/` already exists it adds no empty polly folders next
+to it. Then `/onboard` fills the docs from the real code.
+
+`/commit`, `/create-pr`, `/next-session` and `/prototype` work in any repo.
 `/lesson`, `/best-practice` and `/spike` also work in any repo. Outside polly they
 follow that repo's CLAUDE.md for where notes go; if it names none they ask once and
 create nothing on their own. `/retro` and `/onboard` stay polly-only.

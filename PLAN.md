@@ -20,6 +20,7 @@ the daVinci boilerplate (knowledge base, lessons loop, research before new thing
 | Stage hook | **SessionStart only.** It prints a short stage summary once per session. No per-prompt injection. |
 | Commands vs skills | New lifecycle steps are **skills** in `global/skills/` (Claude Code docs prefer skills for new work), with `disable-model-invocation: true` so they only run when typed. EPAV stays as commands. |
 | Learn and research outside polly | **/lesson, /best-practice, /spike work in any repo.** Outside polly they follow the repo's CLAUDE.md for where notes go, ask once if it names none, and never create folders or INDEX.md. /retro and /onboard stay polly-only. |
+| Prototype | **/prototype** is a skill, not an agent (it is back-and-forth). One HTML file per screen in `prototypes/`, kept in the repo; may cover several tasks (`Covers:` comment). Task criteria are the scope, the mock is a reference: extras go to /tasks, /plan-task lists them as left out. Works in any repo. |
 | Next session | **/next-session** prints a short prompt to paste after /clear (no file), built from real git state. Works in any repo. `claude-mem:handoff` stays for stuck debugging. |
 | Commit and PR | **/commit and /create-pr** skills, typed only, work in any repo (polly extras when `.polly` exists). Each shows the result and waits for OK. No /review-pr: built-in /code-review covers it. |
 | Domain-features registry | **Skipped.** arch.md (code layout) and knowledge/INDEX.md cover it. /retro can add it later if needed. |
@@ -56,7 +57,8 @@ polly-ai-workflow/
 │       ├── onboard/SKILL.md
 │       ├── commit/SKILL.md
 │       ├── create-pr/SKILL.md
-│       └── next-session/SKILL.md
+│       ├── next-session/SKILL.md
+│       └── prototype/SKILL.md
 └── template/
     ├── CLAUDE.md             — empty sections tagged with their owning skill + fixed Workflow section
     ├── .gitignore            — .DS_Store, .env* (stack ignores come from /scaffold)
@@ -109,6 +111,7 @@ polly-ai-workflow/
 | docs/tasks.md | /tasks, /onboard (existing app), /scaffold (T-01 status only), /validate (status), /retro (backlog) |
 | CLAUDE.md sections | /brief (what), /architect (stack), /scaffold (commands, layout), /onboard. Workflow section: fixed by the template. |
 | knowledge/tasks/ | /plan-task (plan), /apply (ticks), /validate (outcome) |
+| prototypes/ | /prototype |
 | knowledge/lessons/ | /lesson |
 | knowledge/decisions/ | /architect, /spike (append-only) |
 | knowledge/best-practices/ | /best-practice |
