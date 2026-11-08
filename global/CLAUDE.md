@@ -34,7 +34,7 @@ missing step, and suggest the skill for it. Don't run it unless I ask.
 | Everything above exists | build loop on the next open task |
 
 Build loop, one task at a time, stopping after each step:
-`/plan-task T-xx` → my approval → `/apply` → `/validate` → `/code-review`.
+`/plan-task T-xx` → my approval → `/apply` → `/validate`. `/code-review` is optional; only when I ask.
 After a task passes `/validate`, suggest `/graphify . --update` to refresh the graph.
 `/next` says which task is next. `/evaluate` is optional: a read-only look without planning.
 

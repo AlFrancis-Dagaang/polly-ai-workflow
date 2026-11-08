@@ -1,5 +1,5 @@
 ---
-description: Prove the work does what it should. Run the repo's checks, sort findings, suggest a review.
+description: Prove the work does what it should. Run the repo's checks, sort findings.
 argument-hint: [anything specific to check]
 ---
 
@@ -25,4 +25,4 @@ Do this:
 7. Say plainly what you did not check and any risk the owner must know.
 8. Look back over this task, including any review findings, and say whether a lesson is owed: a correction from the owner, a claim you had to retract, or a mistake that cost rework. Name it in one line, and say where the repo keeps lessons. Do not write the lesson file; the owner decides.
 
-End with: "Next: /code-review before calling it done."
+End with: "Done once the blockers are cleared. /code-review is optional."
