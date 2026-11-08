@@ -17,6 +17,17 @@ cd ~/polly-ai-workflow && ./install.sh
 `~/.claude/backups/polly-<time>/`. Edits to files in this repo go live at once.
 Rerun it after adding a new skill or command, or after moving this folder.
 
+Several Claude profiles (e.g. work and personal)? List their dirs, one per line,
+in an untracked `.profiles` file in this repo (or pass them as args). One
+`./install.sh` then links every profile to the same `global/`.
+
+On a new machine, `.profiles`, the shell aliases, logins and plugins are yours to
+set up (none are in this repo). Aliases for `~/.zshrc`:
+```sh
+alias claude-work="CLAUDE_CONFIG_DIR=$HOME/.claude-work claude"
+alias claude-personal="CLAUDE_CONFIG_DIR=$HOME/.claude-personal claude"
+```
+
 ## New project
 | # | Run | What happens |
 |---|---|---|

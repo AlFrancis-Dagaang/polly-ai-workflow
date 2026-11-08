@@ -127,10 +127,11 @@ polly-ai-workflow/
 - **Backups:** anything replaced is moved to `~/.claude/backups/polly-<time>/` (same relative path) before linking.
 - **Global CLAUDE.md:** the graphify section is carried into global/CLAUDE.md. Back up the old file, then symlink.
 - **Commands:** `global/commands/*.md` are owned by this repo. Back up the existing file in `~/.claude/commands/`, then symlink.
-- **Skills:** symlink each `global/skills/<name>` on its own, not the whole skills/ folder, so `graphify/` and `synced/` stay where they are. An existing skill of the same name is skipped, never replaced.
+- **Skills:** symlink each `global/skills/<name>` on its own, not the whole skills/ folder, so `synced/` stays where it is. `graphify` is a copy in `global/skills/` like the rest. An existing skill of the same name is skipped, never replaced.
 - **Hooks:** symlink `global/hooks/stage.sh`. Merge the SessionStart entry into ~/.claude/settings.json with `python3` (no jq dependency) and don't touch the other keys.
 - **PATH:** symlink `bin/polly` into `~/.local/bin/` (and warn if that dir isn't on PATH in ~/.zshrc).
 - `CLAUDE_HOME` / `LOCAL_BIN` env vars override the targets, for sandbox tests.
+- **Profiles:** args, else `CLAUDE_HOME`, else lines of untracked `./.profiles`, else `~/.claude`. Each profile is one run of the script.
 - Idempotent: safe to re-run. Print what it linked or skipped.
 
 ## Principles (go into global/CLAUDE.md)

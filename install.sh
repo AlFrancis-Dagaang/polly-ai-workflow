@@ -4,9 +4,22 @@
 # CLAUDE.md and commands/*.md are this repo's to own: an existing file is moved
 # to ~/.claude/backups/polly-<time>/ first. Override targets for testing:
 #   CLAUDE_HOME=/tmp/x LOCAL_BIN=/tmp/x/bin ./install.sh
+# Several profiles: pass their dirs as args, or list them one per line in
+# ./.profiles (untracked, # comments ok). Each runs this script once.
 set -eu
 
 repo=$(cd "$(dirname "$0")" && pwd)
+if [ $# -eq 0 ] && [ -z "${CLAUDE_HOME:-}" ] && [ -f "$repo/.profiles" ]; then
+  set -- $(sed 's/#.*//' "$repo/.profiles")
+fi
+if [ $# -gt 0 ]; then
+  for p in "$@"; do
+    case $p in "~/"*) p=$HOME/${p#"~/"} ;; esac
+    echo "== $p"
+    CLAUDE_HOME=$p "$0"
+  done
+  exit 0
+fi
 claude_home=${CLAUDE_HOME:-$HOME/.claude}
 local_bin=${LOCAL_BIN:-$HOME/.local/bin}
 stamp=$(date +%Y%m%d-%H%M%S)
