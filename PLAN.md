@@ -98,9 +98,9 @@ polly-ai-workflow/
 ## Who owns which file
 | File | Written by |
 |---|---|
-| docs/brief.md | /brief, /retro (updates) |
+| docs/brief.md | /brief, /onboard, /retro (updates) |
 | docs/arch.md | /architect, /scaffold (versions), /onboard |
-| docs/tasks.md | /tasks, /validate (status), /retro (backlog) |
+| docs/tasks.md | /tasks, /onboard (existing app), /scaffold (T-01 status only), /validate (status), /retro (backlog) |
 | CLAUDE.md sections | /brief (what), /architect (stack), /scaffold (commands, layout), /onboard. Workflow section: fixed by the template. |
 | knowledge/tasks/ | /plan-task (plan), /apply (ticks), /validate (outcome) |
 | knowledge/lessons/ | /lesson |
@@ -114,7 +114,7 @@ polly-ai-workflow/
 - Output stays under 10 lines, for example:
   `Stage: brief ✓ · arch ✗ · tasks ✗ · scaffold ✗ → next: /architect`
   `In progress: T-03 (planned, not applied)` · `Lessons: 4 (read knowledge/lessons/ before planning)`
-- Reads task status from docs/tasks.md, which must use this format (/tasks writes it, /validate flips status):
+- Reads task status from docs/tasks.md, which must use this format (/tasks writes it, /validate flips status, /scaffold flips T-01):
   ```
   ## T-01: Walking skeleton
   Status: todo        <- or: done
@@ -147,8 +147,8 @@ polly-ai-workflow/
 2. `template/` + `bin/polly` (test: stamp a throwaway project)
 3. `install.sh` + `global/hooks/stage.sh` (test: new session in the stamped project shows the stage line)
 4. ~~`/brief`~~ done: `global/skills/brief/SKILL.md` (test on a real project)
-5. ~~`/architect`~~ done: `global/skills/architect/SKILL.md` (test on a real project). Still open: `/tasks`, `/scaffold`
+5. ~~`/architect`~~, ~~`/tasks`~~, ~~`/scaffold`~~ done (`global/skills/{architect,tasks,scaffold}/SKILL.md`; test on a real project)
 6. ~~Build loop~~ done early: EPAV commands moved into the repo, /plan-task merged with evaluate, template wired
-7. `/lesson`, `/retro`, `/best-practice`, `/spike`
-8. `polly adopt` + `/onboard` (test on an existing repo)
+7. ~~`/lesson`~~, ~~`/best-practice`~~, ~~`/spike`~~, ~~`/retro`~~ done (`global/skills/{lesson,best-practice,spike,retro}/SKILL.md`)
+8. ~~`polly adopt` + `/onboard`~~ done (`bin/polly`, `global/skills/onboard/SKILL.md`; test on an existing repo)
 9. README.md: written early as the usage guide; tick off ⏳ items as each piece lands

@@ -1,7 +1,7 @@
 #!/bin/sh
 # polly — stamp the workflow structure into a project.
 #   polly <name> [parent-dir]   new project at <parent-dir>/<name> (default: current dir)
-#   polly adopt [dir]           add missing structure to an existing repo (not built yet)
+#   polly adopt [dir]           add missing structure to an existing repo, never overwrite
 set -eu
 
 usage() {
@@ -59,11 +59,55 @@ new_project() {
   printf 'Next: cd %s && claude, then run /brief\n' "$target"
 }
 
+adopt_project() {
+  dir=${1:-.}
+  [ -d "$dir" ] || die "dir '$dir' does not exist"
+  target=$(cd "$dir" && pwd)
+  git -C "$target" rev-parse --git-dir >/dev/null 2>&1 || die "'$target' is not a git repo"
+  if [ -f "$target/.polly" ]; then
+    printf '%s is already a polly project\n' "$target"
+    return 0
+  fi
+
+  # An existing knowledge/ keeps its own layout: don't add empty polly folders next to it.
+  keep_knowledge=0
+  [ -e "$target/knowledge" ] && keep_knowledge=1
+
+  (cd "$template" && find . -type f ! -name .polly | sort) | while IFS= read -r f; do
+    f=${f#./}
+    case $f in
+      knowledge/*/.gitkeep) [ "$keep_knowledge" = 1 ] && continue ;;
+    esac
+    dest=$target/$f
+    if [ -e "$dest" ]; then
+      printf '  skipped (exists)  %s\n' "$f"
+    else
+      mkdir -p "$(dirname "$dest")"
+      cp "$template/$f" "$dest"
+      [ "$f" = CLAUDE.md ] && sed -i '' "s/{{name}}/$(basename "$target")/g" "$dest"
+      printf '  added             %s\n' "$f"
+    fi
+  done
+
+  if [ -f "$target/.gitignore" ] && ! grep -Eq '^\.env' "$target/.gitignore"; then
+    printf 'polly: warning: .gitignore does not ignore .env\n' >&2
+  fi
+
+  cp "$template/.polly" "$target/.polly"
+  printf '  added             .polly\n'
+  git -C "$target" status --short
+  printf 'Nothing committed. Next: cd %s && claude, then run /onboard\n' "$target"
+}
+
 [ $# -ge 1 ] || { usage >&2; exit 1; }
 
 case $1 in
   -h|--help) usage ;;
-  adopt) die "'polly adopt' is not built yet (build step 8)" ;;
+  adopt)
+    [ $# -le 2 ] || { usage >&2; exit 1; }
+    shift
+    adopt_project "$@"
+    ;;
   *)
     [ $# -le 2 ] || { usage >&2; exit 1; }
     new_project "$@"
