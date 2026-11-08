@@ -68,6 +68,11 @@ Work in any repo, typed only. Both show what they will do and wait for my OK.
 | `/commit` | Reviews the changes, flags secrets, drafts a message in the repo's own style, stages by name, commits. Never pushes |
 | `/create-pr` | Drafts the PR from the commits, shows the `gh` account and repo, pushes and opens it only after OK. Never merges |
 
+## Next session
+| Run | What happens |
+|---|---|
+| `/next-session` | Checks `git`, then prints a short prompt (done, decisions, state, bugs, what's left) to paste after `/clear`. Writes no file. For a stuck debugging session, `claude-mem:handoff` writes a longer HANDOFF.md |
+
 ## Existing (non-polly) repos
 The EPAV commands (`/next`, `/evaluate`, `/plan-task`, `/apply`, `/validate`)
 work in any repo: they follow that repo's own CLAUDE.md for where plans,
