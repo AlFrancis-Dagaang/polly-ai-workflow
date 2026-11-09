@@ -5,7 +5,7 @@ or architecture doc. `polly` creates the structure; Claude fills it in as we
 work: interview, lightweight docs, scaffold, then build task by task with a
 stop for my review after each step.
 
-Design and decisions: [PLAN.md](PLAN.md).
+Design and decisions: [PLAN.md](PLAN.md). Every skill and command, one by one: [GUIDE.md](GUIDE.md).
 
 ## Install (once per machine)
 ```sh
