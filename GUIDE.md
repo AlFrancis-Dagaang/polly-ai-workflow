@@ -64,7 +64,7 @@ Outside polly, `/lesson`, `/best-practice` and `/spike` ask once where notes go 
 | Skill | What it does |
 |---|---|
 | `/commit` | Reviews changes, flags secrets, drafts a message in the repo's style, shows it and waits for OK, stages files by name, commits. Never pushes |
-| `/create-pr` | Drafts the PR from the commits, shows the `gh` account and repo, pushes and opens it only after OK. Never merges. Needs `gh` (`brew install gh`, `gh auth login` per profile) |
+| `/create-pr` | Drafts the PR from the commits, shows the `gh` account and repo, pushes and opens it only after OK. Never merges. Needs `gh` (`brew install gh` on macOS, `sudo apt install gh` on Ubuntu, then `gh auth login` per profile) |
 
 ## Session skill
 

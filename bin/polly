@@ -44,7 +44,7 @@ new_project() {
 
   mkdir "$target"
   cp -R "$template/." "$target/"
-  sed -i '' "s/{{name}}/$name/g" "$target/CLAUDE.md"
+  sed "s/{{name}}/$name/g" "$target/CLAUDE.md" > "$target/CLAUDE.md.tmp" && mv "$target/CLAUDE.md.tmp" "$target/CLAUDE.md"
 
   (
     cd "$target"
@@ -84,7 +84,7 @@ adopt_project() {
     else
       mkdir -p "$(dirname "$dest")"
       cp "$template/$f" "$dest"
-      [ "$f" = CLAUDE.md ] && sed -i '' "s/{{name}}/$(basename "$target")/g" "$dest"
+      [ "$f" = CLAUDE.md ] && { sed "s/{{name}}/$(basename "$target")/g" "$dest" > "$dest.tmp" && mv "$dest.tmp" "$dest"; }
       printf '  added             %s\n' "$f"
     fi
   done

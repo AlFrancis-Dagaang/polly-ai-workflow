@@ -22,11 +22,23 @@ in an untracked `.profiles` file in this repo (or pass them as args). One
 `./install.sh` then links every profile to the same `global/`.
 
 On a new machine, `.profiles`, the shell aliases, logins and plugins are yours to
-set up (none are in this repo). Aliases for `~/.zshrc`:
+set up (none are in this repo). Aliases for `~/.zshrc` (macOS) or `~/.bashrc` (Ubuntu):
 ```sh
 alias claude-work="CLAUDE_CONFIG_DIR=$HOME/.claude-work claude"
 alias claude-personal="CLAUDE_CONFIG_DIR=$HOME/.claude-personal claude"
 ```
+
+### WSL / Ubuntu
+Same steps, with apt instead of brew and `~/.bashrc` instead of `~/.zshrc`:
+```sh
+sudo apt update && sudo apt install -y git
+git clone <this repo> ~/polly-ai-workflow
+cd ~/polly-ai-workflow && ./install.sh
+```
+Put the aliases above in `~/.bashrc`, and add `export PATH="$HOME/.local/bin:$PATH"`
+there if `install.sh` warns that `~/.local/bin` is not on PATH. Work inside the
+Linux filesystem (`~/`), not `/mnt/c`. For `/create-pr`, install `gh` with
+`sudo apt install gh` (or GitHub's apt repo if your release lacks it).
 
 ## New project
 | # | Run | What happens |

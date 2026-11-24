@@ -19,7 +19,8 @@ Evaluate first:
 
 Then plan:
 4. Write the plan with checkboxes, file by file: what changes, in what order, and why. Keep it the smallest change that fully solves the task. Name what you are leaving out. For a new feature, make the first items the files CLAUDE.md requires (the brief, the registry row, the story files); list them, do not create them yet. /apply creates them after approval.
-5. List how each step will be checked: the repo's own checks, and what you will look at to prove it works. Every acceptance criterion gets a check.
-6. List open questions and any choice you made that the owner should confirm.
+5. List every dependency the plan adds, each with its exact version (checked against current docs, not memory), pinned with no `^` or `~`. Say plainly: approving the plan approves these dependencies. If the plan adds none, say "No new dependencies."
+6. List how each step will be checked: the repo's own checks, and what you will look at to prove it works. Every acceptance criterion gets a check.
+7. List open questions and any choice you made that the owner should confirm.
 
 Then stop and wait for approval. Do not start applying. End with: "Next: /apply once you approve."

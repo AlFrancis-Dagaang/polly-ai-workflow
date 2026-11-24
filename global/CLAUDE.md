@@ -14,7 +14,7 @@ A project's own CLAUDE.md wins over this file where they differ.
 ## Defaults
 - New projects: TypeScript full-stack. pnpm, Vitest, Vercel. Pin exact versions.
   Existing projects keep their own stack.
-- OS: macOS, zsh. Avoid GNU-only flags in scripts.
+- OS: macOS or WSL Ubuntu (bash); scripts must work with BSD and GNU tools.
 - Don't commit unless I ask. When I do, `/commit`, then `/create-pr` (any repo).
 - Any repo, typed only: `/lesson` after a correction, `/best-practice` before adding
   something new, `/spike` to answer one technical question with throwaway code. They

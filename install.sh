@@ -107,7 +107,13 @@ echo "PATH"
 link "$repo/bin/polly" "$local_bin/polly"
 case ":$PATH:" in
   *":$local_bin:"*) ;;
-  *) say WARN "$local_bin is not on PATH. Add to ~/.zshrc: export PATH=\"$local_bin:\$PATH\"" ;;
+  *)
+    case "${SHELL:-}" in
+      */zsh) rc='~/.zshrc' ;;
+      */bash) rc='~/.bashrc' ;;
+      *) rc='~/.zshrc or ~/.bashrc' ;;
+    esac
+    say WARN "$local_bin is not on PATH. Add to $rc: export PATH=\"$local_bin:\$PATH\"" ;;
 esac
 
 echo "Done."
